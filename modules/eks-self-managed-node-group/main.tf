@@ -24,9 +24,33 @@ resource "aws_autoscaling_group" "this" {
   desired_capacity = var.desired_size
   max_size         = var.max_size
 
-  launch_template {
-    name    = var.launch_template.name
-    version = var.launch_template.version
+  dynamic "launch_template" {
+    for_each = var.instance_types == null ? [1] : []
+    content {
+      name    = var.launch_template.name
+      version = var.launch_template.version
+    }
+  }
+
+  # instance_types override: aws_autoscaling_group can only vary instance type away from the
+  # launch template's own value via mixed_instances_policy, so switch to that shape when set.
+  dynamic "mixed_instances_policy" {
+    for_each = var.instance_types == null ? [] : [1]
+    content {
+      launch_template {
+        launch_template_specification {
+          launch_template_name = var.launch_template.name
+          version              = var.launch_template.version
+        }
+
+        dynamic "override" {
+          for_each = var.instance_types
+          content {
+            instance_type = override.value
+          }
+        }
+      }
+    }
   }
 
   dynamic "tag" {
