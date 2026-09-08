@@ -41,9 +41,6 @@ locals {
     selfManagedNodeGroup:
       nodeGroupName: sedai-labs-beta-smng
       minSize: 0
-      desiredSize: 0
-      maxSize: 0
-      instanceTypes: [t3.medium]
       diskSize: 20
       launchTemplate:
         name: sedai-labs-beta-smng-2026052211254333540000000b
@@ -117,10 +114,7 @@ module "self_managed_node_group" {
   subnet_ids      = local.config.subnetIds
 
   min_size        = local.config.selfManagedNodeGroup.minSize
-  desired_size    = local.config.selfManagedNodeGroup.desiredSize
-  max_size        = local.config.selfManagedNodeGroup.maxSize
   launch_template = local.config.selfManagedNodeGroup.launchTemplate
-  instance_types  = try(local.config.selfManagedNodeGroup.instanceTypes, null)
   disk_size       = try(local.config.selfManagedNodeGroup.diskSize, null)
 
   tags = {
