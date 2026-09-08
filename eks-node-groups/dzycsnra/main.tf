@@ -114,7 +114,10 @@ module "self_managed_node_group" {
   subnet_ids      = local.config.subnetIds
 
   min_size        = local.config.selfManagedNodeGroup.minSize
+  desired_size    = try(local.config.selfManagedNodeGroup.desiredSize,null)
+  max_size        = try(local.config.selfManagedNodeGroup.maxSize,null)
   launch_template = local.config.selfManagedNodeGroup.launchTemplate
+  instance_types  = try(local.config.selfManagedNodeGroup.instanceTypes, null)
   disk_size       = try(local.config.selfManagedNodeGroup.diskSize, null)
 
   tags = {
