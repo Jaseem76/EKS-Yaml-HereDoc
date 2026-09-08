@@ -17,12 +17,12 @@ variable "min_size" {
 
 variable "desired_size" {
   type    = number
-  default = 0
+  default = 2
 }
 
 variable "max_size" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "launch_template" {
@@ -40,7 +40,7 @@ variable "instance_types" {
     itself specifies.
   EOT
   type        = list(string)
-  default     = null
+  default     = "c5a.xlarge"
 }
 
 variable "disk_size" {
