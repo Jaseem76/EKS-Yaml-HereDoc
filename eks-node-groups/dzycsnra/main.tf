@@ -39,9 +39,12 @@ locals {
     # The one self-managed nodegroup on this cluster — see modules/eks-self-managed-node-group.
     # autoScalingConfig on the source row is min=0/desired=0/max=0 with autoScalerEnabled false.
     selfManagedNodeGroup:
-      nodeGroupName: sedai-labs-beta-smng
-      minSize: 0
-      diskSize: 20
+      nodeGroupName: sedai-labs-beta-smng-0
+      instanceTypes: ["c5a.xlarge"]
+      minSize: 2
+      desiredSize: 2
+      maxSize: 2
+      diskSize: 30
       launchTemplate:
         name: sedai-labs-beta-smng-2026052211254333540000000b
         version: "14"
@@ -113,7 +116,10 @@ module "self_managed_node_group" {
   cluster_name    = local.config.clusterName
   subnet_ids      = local.config.subnetIds
 
+  instance_types  = local.config.selfManagedNodeGroup.instanceTypes
   min_size        = local.config.selfManagedNodeGroup.minSize
+  desired_size    = local.config.selfManagedNodeGroup.desiredSize
+  max_size        = local.config.selfManagedNodeGroup.maxSize
   launch_template = local.config.selfManagedNodeGroup.launchTemplate
   disk_size       = try(local.config.selfManagedNodeGroup.diskSize, null)
 
