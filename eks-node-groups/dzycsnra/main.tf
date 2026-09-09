@@ -74,7 +74,7 @@ locals {
       # Same launch template family as mng-1, one version behind, t3.medium instead of m7a.medium.
       sedai-labs-beta-mng-2-rollback-v2:
         instanceTypes: [t3.medium]
-        minSize: 2
+        minSize: 3
         desiredSize: 5
         maxSize: 5
         diskSize: 20
