@@ -78,7 +78,7 @@ locals {
         desiredSize: 5
         maxSize: 5
         diskSize: 20
-        launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "11"}
+        launchTemplate: {name: sedai-labs-beta-mng-2-20260909120000000000000099, version: "12"}
 
       # CUSTOM amiType: the launch template ("brian-test") carries its own image (t2.xlarge nodes
       # observed live), so instanceTypes is empty and EKS must not pick one. min == desired == max
