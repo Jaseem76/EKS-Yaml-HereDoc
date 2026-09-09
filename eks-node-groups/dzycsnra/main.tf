@@ -1,8 +1,8 @@
 # EKS managed node groups for sedai-labs-beta (account dzycsnra).
 #
-# Transcribed from edisondb.sedai_resources: 3 KUBERNETES_EKS_NODE_GROUP_WITH_LAUNCH_TEMPLATE rows
-# (sedai-labs-beta-mng-1-rollback-v1, sedai-labs-beta-mng-2-rollback-v2, test) and 1
-# KUBERNETES_EKS_SELF_MANAGED_NODE_GROUP row (sedai-labs-beta-smng).
+# Transcribed from edisondb.sedai_resources: 4 KUBERNETES_EKS_NODE_GROUP_WITH_LAUNCH_TEMPLATE rows
+# (sedai-labs-beta-mng-1-rollback-v1, sedai-labs-beta-mng-2-rollback-v1, sedai-labs-beta-mng-2-rollback-v2,
+# test) and 1 KUBERNETES_EKS_SELF_MANAGED_NODE_GROUP row (sedai-labs-beta-smng).
 #
 # The whole config below is YAML, not tfvars: this repo declares node pools the way a Kubernetes
 # manifest would, and Terraform only supplies the heredoc + yamldecode() plumbing to turn that YAML
@@ -55,6 +55,21 @@ locals {
         maxSize: 2
         diskSize: 20
         launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "12"}
+
+      # Same launch template family as mng-1-rollback-v1 (name), two versions behind (v10 vs v12).
+      # Tainted to route pods off this group toward mng-2-rollback-v2.
+      sedai-labs-beta-mng-2-rollback-v1:
+        instanceTypes: [t3.medium]
+        minSize: 5
+        desiredSize: 5
+        maxSize: 5
+        capacityType: ON_DEMAND
+        amiType: AL2023_x86_64_STANDARD
+        launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "10"}
+        taints:
+          - key: node.sedai.io/replaced-by
+            value: sedai-labs-beta-mng-2-rollback-v2
+            effect: NO_SCHEDULE
 
       # Same launch template family as mng-1, one version behind, t3.medium instead of m7a.medium.
       sedai-labs-beta-mng-2-rollback-v2:
