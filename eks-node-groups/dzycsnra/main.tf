@@ -75,9 +75,9 @@ locals {
       sedai-labs-beta-mng-2-rollback-v2:
         instanceTypes: [t3.medium]
         minSize: 3
-        desiredSize: 5
-        maxSize: 5
-        diskSize: 20
+        desiredSize: 4
+        maxSize: 8
+        diskSize: 50
         launchTemplate: {name: sedai-labs-beta-mng-2-20260909120000000000000099, version: "12"}
 
       # CUSTOM amiType: the launch template ("brian-test") carries its own image (t2.xlarge nodes
