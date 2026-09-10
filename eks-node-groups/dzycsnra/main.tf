@@ -71,15 +71,6 @@ locals {
             value: sedai-labs-beta-mng-2-rollback-v2
             effect: NO_SCHEDULE
 
-      # Same launch template family as mng-1, one version behind, t3.medium instead of m7a.medium.
-      sedai-labs-beta-mng-2-rollback-v2:
-        instanceTypes: [t3.medium]
-        minSize: 2
-        desiredSize: 5
-        maxSize: 5
-        diskSize: 20
-        launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "11"}
-
       # CUSTOM amiType: the launch template ("brian-test") carries its own image (t2.xlarge nodes
       # observed live), so instanceTypes is empty and EKS must not pick one. min == desired == max
       # == 0 in the source row — currentNodeCount:1 is live drift the IaC does not chase.
