@@ -48,7 +48,7 @@ locals {
 
     nodeGroups:
       # rollback_v1 label on the launch template: pinned to m7a.medium, min == desired == max == 2.
-      sedai-labs-beta-mng-1-rollback-v1:
+      sedai-labs-beta-mng-1-new:
         instanceTypes: ["m7a.medium"]
         minSize: 2
         desiredSize: 2
