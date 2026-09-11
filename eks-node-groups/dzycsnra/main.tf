@@ -40,7 +40,7 @@ locals {
     # autoScalingConfig on the source row is min=0/desired=0/max=0 with autoScalerEnabled false.
     selfManagedNodeGroup:
       nodeGroupName: sedai-labs-beta-smng
-      minSize: 3
+      minSize: 1
       diskSize: 20
       launchTemplate:
         name: sedai-labs-beta-smng-2026052211254333540000000b

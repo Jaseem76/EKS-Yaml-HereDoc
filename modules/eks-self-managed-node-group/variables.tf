@@ -22,7 +22,7 @@ variable "desired_size" {
 
 variable "max_size" {
   type    = number
-  default = 3
+  default = 6
 }
 
 variable "launch_template" {
