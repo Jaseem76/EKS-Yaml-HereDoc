@@ -47,15 +47,6 @@ locals {
         version: "14"
 
     nodeGroups:
-      # rollback_v1 label on the launch template: pinned to m7a.medium, min == desired == max == 2.
-      sedai-labs-beta-mng-1-rollback-v1:
-        instanceTypes: ["m7a.medium"]
-        minSize: 2
-        desiredSize: 2
-        maxSize: 2
-        diskSize: 20
-        launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "13"}
-
       # Same launch template family as mng-1-rollback-v1 (name), two versions behind (v10 vs v12).
       # Tainted to route pods off this group toward mng-2-rollback-v2.
       sedai-labs-beta-mng-2-rollback-v1:
