@@ -59,7 +59,7 @@ locals {
       # Same launch template family as mng-1-rollback-v1 (name), two versions behind (v10 vs v12).
       # Tainted to route pods off this group toward mng-2-rollback-v2.
       sedai-labs-beta-mng-2-rollback-v1:
-        instanceTypes: [t3.medium]
+        instanceTypes: ["t3.large", "t3.xlarge"]
         minSize: 5
         desiredSize: 5
         maxSize: 5
@@ -92,6 +92,13 @@ locals {
         launchTemplate: {name: brian-test, version: "5"}
   YAML
   )
+  config = {
+    nodeGroups = {
+      sedai-labs-beta-mng-2-rollback-v1 = {
+        diskSize = 40
+      }
+    }
+  }
 }
 
 module "node_group" {
