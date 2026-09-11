@@ -121,27 +121,7 @@ module "node_group" {
   }
 }
 
-module "self_managed_node_group" {
-  source = "../../modules/eks-self-managed-node-group"
-
-  node_group_name = local.config.selfManagedNodeGroup.nodeGroupName
-  cluster_name    = local.config.clusterName
-  subnet_ids      = local.config.subnetIds
-
-  min_size        = local.config.selfManagedNodeGroup.minSize
-  launch_template = local.config.selfManagedNodeGroup.launchTemplate
-  disk_size       = try(local.config.selfManagedNodeGroup.diskSize, null)
-
-  tags = {
-    Terraform   = "true"
-    Environment = "labs"
-  }
-}
 
 output "node_group_names" {
   value = [for m in module.node_group : m.node_group_name]
-}
-
-output "self_managed_node_group_name" {
-  value = module.self_managed_node_group.node_group_name
 }
