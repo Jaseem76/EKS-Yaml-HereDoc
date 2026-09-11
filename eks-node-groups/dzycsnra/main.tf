@@ -40,6 +40,7 @@ locals {
     # autoScalingConfig on the source row is min=0/desired=0/max=0 with autoScalerEnabled false.
     selfManagedNodeGroup:
       nodeGroupName: sedai-labs-beta-smng
+      instanceTypes: ["c6a.xlarge"]
       minSize: 1
       diskSize: 20
       launchTemplate:
@@ -129,6 +130,7 @@ module "self_managed_node_group" {
   subnet_ids      = local.config.subnetIds
 
   min_size        = local.config.selfManagedNodeGroup.minSize
+  instance_types  = local.config.selfManagedNodeGroup.instanceTypes
   launch_template = local.config.selfManagedNodeGroup.launchTemplate
   disk_size       = try(local.config.selfManagedNodeGroup.diskSize, null)
 
