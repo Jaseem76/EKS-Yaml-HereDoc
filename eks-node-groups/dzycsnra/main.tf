@@ -38,14 +38,6 @@ locals {
 
     # The one self-managed nodegroup on this cluster — see modules/eks-self-managed-node-group.
     # autoScalingConfig on the source row is min=0/desired=0/max=0 with autoScalerEnabled false.
-    selfManagedNodeGroup:
-      nodeGroupName: sedai-labs-beta-smng-0
-      minSize: 2
-      diskSize: 30
-      launchTemplate:
-        name: sedai-labs-beta-smng-2026052211254333540000000b
-        version: "14"
-
     nodeGroups:
       # rollback_v1 label on the launch template: pinned to m7a.medium, min == desired == max == 2.
       sedai-labs-beta-mng-1-rollback-v1:
@@ -121,27 +113,7 @@ module "node_group" {
   }
 }
 
-module "self_managed_node_group" {
-  source = "../../modules/eks-self-managed-node-group"
-
-  node_group_name = local.config.selfManagedNodeGroup.nodeGroupName
-  cluster_name    = local.config.clusterName
-  subnet_ids      = local.config.subnetIds
-
-  min_size        = local.config.selfManagedNodeGroup.minSize
-  launch_template = local.config.selfManagedNodeGroup.launchTemplate
-  disk_size       = try(local.config.selfManagedNodeGroup.diskSize, null)
-
-  tags = {
-    Terraform   = "true"
-    Environment = "labs"
-  }
-}
 
 output "node_group_names" {
   value = [for m in module.node_group : m.node_group_name]
-}
-
-output "self_managed_node_group_name" {
-  value = module.self_managed_node_group.node_group_name
 }
