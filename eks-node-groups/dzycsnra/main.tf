@@ -95,6 +95,13 @@ locals {
   YAML
   )
  
+  config = {
+    nodeGroups = {
+      sedai-labs-beta-mng-2-rollback-v1 = {
+        diskSize = 40
+      }
+    }
+  }
 }
 
 module "node_group" {
