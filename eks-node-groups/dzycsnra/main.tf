@@ -72,6 +72,7 @@ locals {
           - key: node.sedai.io/replaced-by
             value: sedai-labs-beta-mng-2-rollback-v2
             effect: NO_SCHEDULE
+        diskSize: 40
 
       # Same launch template family as mng-1, one version behind, t3.medium instead of m7a.medium.
       sedai-labs-beta-mng-2-rollback-v2:
