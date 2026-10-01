@@ -41,7 +41,9 @@ locals {
     selfManagedNodeGroup:
       nodeGroupName: sedai-labs-beta-smng-0
       minSize: 2
+      
       diskSize: 30
+
       launchTemplate:
         name: sedai-labs-beta-smng-2026052211254333540000000b
         version: "14"
@@ -50,8 +52,11 @@ locals {
       # rollback_v1 label on the launch template: pinned to m7a.medium, min == desired == max == 2.
       sedai-labs-beta-mng-1-rollback-v1:
         instanceTypes: ["m7a.medium"]
+       
         minSize: 2
+       
         desiredSize: 2
+       
         maxSize: 2
         diskSize: 20
         launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "12"}
@@ -61,7 +66,9 @@ locals {
       sedai-labs-beta-mng-2-rollback-v1:
         instanceTypes: ["t3.large"]
         minSize: 5
+       
         desiredSize: 5
+       
         maxSize: 5
         capacityType: ON_DEMAND
         amiType: AL2023_x86_64_STANDARD
@@ -71,6 +78,7 @@ locals {
             value: sedai-labs-beta-mng-2-rollback-v2
             effect: NO_SCHEDULE
         diskSize: 40
+        
       # Same launch template family as mng-1, one version behind, t3.medium instead of m7a.medium.
       sedai-labs-beta-mng-2-rollback-v2:
         instanceTypes: [t3.medium]
