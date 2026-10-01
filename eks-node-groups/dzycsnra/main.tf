@@ -42,7 +42,6 @@ locals {
       nodeGroupName: sedai-labs-beta-smng-0
       minSize: 2
       diskSize: 30
-      
       launchTemplate:
         name: sedai-labs-beta-smng-2026052211254333540000000b
         version: "14"
@@ -63,7 +62,6 @@ locals {
         instanceTypes: ["t3.large"]
         minSize: 5
         desiredSize: 5
-
         maxSize: 5
         capacityType: ON_DEMAND
         amiType: AL2023_x86_64_STANDARD
@@ -73,14 +71,11 @@ locals {
             value: sedai-labs-beta-mng-2-rollback-v2
             effect: NO_SCHEDULE
         diskSize: 40
-
       # Same launch template family as mng-1, one version behind, t3.medium instead of m7a.medium.
       sedai-labs-beta-mng-2-rollback-v2:
         instanceTypes: [t3.medium]
         minSize: 2
-
         desiredSize: 5
-
         maxSize: 5
         diskSize: 20
         launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "11"}
