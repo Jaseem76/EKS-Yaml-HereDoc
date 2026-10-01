@@ -65,9 +65,7 @@ locals {
         maxSize: 5
         capacityType: ON_DEMAND
         amiType: AL2023_x86_64_STANDARD
-        launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "10"}
-        
-        
+        launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "10"}      
         taints:
           - key: node.sedai.io/replaced-by
             value: sedai-labs-beta-mng-2-rollback-v2
