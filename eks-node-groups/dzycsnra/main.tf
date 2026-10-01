@@ -42,6 +42,7 @@ locals {
       nodeGroupName: sedai-labs-beta-smng-0
       minSize: 2
       diskSize: 30
+      
       launchTemplate:
         name: sedai-labs-beta-smng-2026052211254333540000000b
         version: "14"
@@ -62,6 +63,7 @@ locals {
         instanceTypes: ["t3.large"]
         minSize: 5
         desiredSize: 5
+
         maxSize: 5
         capacityType: ON_DEMAND
         amiType: AL2023_x86_64_STANDARD
@@ -76,7 +78,9 @@ locals {
       sedai-labs-beta-mng-2-rollback-v2:
         instanceTypes: [t3.medium]
         minSize: 2
+
         desiredSize: 5
+
         maxSize: 5
         diskSize: 20
         launchTemplate: {name: sedai-labs-beta-mng-1-20260610105144400700000001, version: "11"}
@@ -107,7 +111,9 @@ module "node_group" {
   subnet_ids      = local.config.subnetIds
 
   instance_types  = each.value.instanceTypes
+  
   min_size        = each.value.minSize
+  
   desired_size    = each.value.desiredSize
   max_size        = each.value.maxSize
   disk_size       = try(each.value.diskSize, null)
